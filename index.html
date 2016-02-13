@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>On/Off functions</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1 style="text-align: center;">Javascript onFunctionsJS,<br>jQuery like (NodeList and HTMLElement) on/off function<br>
+            <small>Download from:
+                <a href="https://github.com/andrastoth/onFunctionsJS" target="_blank"> GitHub </a> or
+                <a href="" target="_blank" > JSclasses </a>
+            </small>
+        </h1>
+        <div class="container">
+            <div class="left-side">
+                <button>Button</button>
+                <span>Span</span>
+                <div class="img-div">
+                    <img src="js.png">
+                </div>
+            </div>
+            <div class="center"></div>
+            <div class="right-side">
+                <button>Button</button>
+                <span>Span</span>
+                <div class="img-div">
+                    <img src="js.png">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="left-doc">
+<!-- HTML generated using hilite.me --><div style="background: #272822;padding: 5px; overflow:auto;width:auto;text-align:left;font-size:11px;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rightSide</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">querySelector</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.right-side&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">leftSide</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">querySelector</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.left-side&#39;</span><span style="color: #f8f8f2">);</span>
+
+<span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">on</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;mouseenter, mouseleave&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;button, span, .img-div&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">e</span><span style="color: #f8f8f2">){</span>
+    <span style="color: #a6e22e">e</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stopPropagation</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">e</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">type</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;mouseleave&#39;</span><span style="color: #f8f8f2">){</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">style</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">background</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;&#39;</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span><span style="color: #66d9ef">else</span><span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">style</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">background</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;red&#39;</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">});</span>
+
+<span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">on</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;click&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;button, span, .img-div&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">e</span><span style="color: #f8f8f2">){</span>
+    <span style="color: #a6e22e">e</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stopPropagation</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">});</span>
+</pre></div>
+            </div>
+            <div class="center-doc">
+<!-- HTML generated using hilite.me --><div style="background: #272822;padding: 5px; overflow:auto;width:auto;text-align:left;font-size:11px;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">center</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">querySelector</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.center&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">centerHandler</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">querySelector</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.center-handler&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #a6e22e">centerHandler</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">on</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;click&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;button&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(){</span>
+    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f92672">!</span><span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span><span style="color: #f8f8f2">){</span>
+        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">len</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">center</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #66d9ef">for</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #a6e22e">i</span> <span style="color: #f92672">&lt;</span> <span style="color: #a6e22e">len</span><span style="color: #f8f8f2">;</span> <span style="color: #a6e22e">i</span><span style="color: #f92672">++</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">i</span> <span style="color: #f92672">%</span> <span style="color: #ae81ff">2</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> 
+                <span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">center</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]);</span>
+            <span style="color: #66d9ef">else</span>
+                <span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">center</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]);</span>
+            <span style="color: #66d9ef">this</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">innerText</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Pull top items to neutral area&#39;</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #f8f8f2">};</span>
+    <span style="color: #f8f8f2">}</span><span style="color: #66d9ef">else</span><span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #a6e22e">center</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]);</span>
+        <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #a6e22e">center</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]);</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f92672">!</span><span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">children</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">length</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">innerText</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Divide the items from the containers&#39;</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">});</span>
+</pre></div>
+            </div>
+            <div class="right-doc">
+<!-- HTML generated using hilite.me --><div style="background: #272822;padding: 5px; overflow:auto;width:auto;text-align:left;font-size:11px;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">var</span> <span style="color: #a6e22e">rightSide</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">querySelector</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.right-side&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">leftSide</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">querySelector</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;.left-side&#39;</span><span style="color: #f8f8f2">);</span>
+
+<span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">on</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;mouseenter, mouseleave&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;button, span, .img-div&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">e</span><span style="color: #f8f8f2">){</span>
+    <span style="color: #a6e22e">e</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stopPropagation</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #66d9ef">if</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">e</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">type</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;mouseleave&#39;</span><span style="color: #f8f8f2">){</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">style</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">background</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;&#39;</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span><span style="color: #66d9ef">else</span><span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">this</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">style</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">background</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;green&#39;</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">});</span>
+
+<span style="color: #a6e22e">rightSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">on</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;click&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;button, span, .img-div&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">e</span><span style="color: #f8f8f2">){</span>
+    <span style="color: #a6e22e">e</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stopPropagation</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #a6e22e">leftSide</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">this</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">});</span>
+</pre></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="left-handler">
+                <button onclick="leftOnOff();">off/on mouseleave on left side .img-div tag</button>
+            </div>
+            <div class="center-handler">
+                <button>Pull top items to neutral area</button>
+            </div>
+            <div class="right-handler">
+                <button onclick="rightOnOff();">off/on mouseleave on right side .img-div tag</button>
+            </div>
+        </div>
+        <script src="onFunctionsJS.js" type="text/javascript"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
+

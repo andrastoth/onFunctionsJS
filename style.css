@@ -1,0 +1,105 @@
+body {
+    width: auto;
+    margin: 0;
+    margin-top: 20px;
+    padding: 5px;
+    color: white;
+    background: blueviolet;
+}
+
+.left-side:after, .right-side:after {
+    color: white;
+    content: "click to item to move =>";
+    padding: 2px;
+    display: none;
+    position: relative;
+    top: -30px;
+    left: 0;
+    width: calc(100% - 6px);
+    text-align: center;
+    background-color: orange;
+    border: 1px solid yellow;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.left-side:hover:after, .right-side:hover:after {
+    position: absolute;
+    display: block;
+}
+
+.right-side:after {
+    content: "<= click to item to move";
+}
+
+.header, .container {
+    text-align: center;
+}
+
+.container {
+    width: calc(100% - 10px);
+    padding: 5px;
+    height: 305px;
+    position: relative;
+    display: inline-flex;
+    background: lightgray;
+}
+
+.center, .center-handler, .center-doc {
+    position: relative;
+    text-align: center;
+    float: right;
+    padding: 5px;
+    margin: 5px;
+    width: calc(33% - 15px);
+    height: calc(100% - 20px);
+    background: lightgreen;
+}
+
+.left-side, .left-doc, .left-handler {
+    position: relative;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    width: calc(33% - 15px);
+    height: calc(100% - 20px);
+    background: lightcoral;
+}
+
+.left-side > *, .right-side > *, .center > * {
+    width: 100%;
+    display: block;
+}
+
+.right-side, .right-doc, .right-handler {
+    position: relative;
+    padding: 5px;
+    margin: 5px;
+    float: right;
+    width: calc(33% - 15px);
+    height: calc(100% - 20px);
+    background: lightsteelblue;
+}
+
+.left-handler, .right-handler, .center-handler {
+    height: auto;
+    text-align: center;
+    background: transparent;
+}
+
+img {
+    display: inline-block;
+    height: 80px;
+    width: 80px;
+}
+
+.container:span {
+    background: lightsteelblue;
+}
+
+.container:last-of-type {
+    height: calc(100% - 20px);
+}
