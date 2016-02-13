@@ -1,40 +1,16 @@
-WebCodeCamJS & WebCodeCamJQuery
-===============================
+onFunctionsJS
+=============
 
-New versions of popular WebCodeCam jQuery plugin<br>
-
-    - Very simple usage
-    - Some option for optimal result
-    - Quick implementation
-    - Optimized for all modern browsers
-
-Advantages compared to the previous version:<br>
-
-    - Built in camera selector menu creation
-    - Faster
-    - Lower CPU and Memory usage
-    - More configurable
+Javascript jQuery like (NodeList and HTMLElement) on/off function
 
 * [Homepage] - Home page, demonstration
 
-<img src = "demo.jpg" width="100%"/>
+<img src = "icon.png" width="100%"/>
 
 Version
 ----
 
 1.0.0
-
-    - Very simple usage
-    - Some option for optimal result
-    - Quick implementation
-
-Included decoders
------------
-
-barcode decoder ([DecoderWorker.js])
-
-qr-decoder ([qrcodelib.js])
- 
 
 Required HTML & Javascript example
 --------------
