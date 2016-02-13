@@ -5,7 +5,9 @@ Javascript jQuery like (NodeList and HTMLElement) on/off function
 
 * [Homepage] - Home page, demonstration
 
-<img src = "icon.png" width="100%"/>
+<p align="center">
+    <img src="/icon.png">
+</p>
 
 Version
 ----
