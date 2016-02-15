@@ -1,3 +1,10 @@
+/**
+ * onFunctions 1.0.0 javascript jQuery like on/of function
+ * Author: Tóth András
+ * Web: http://atandrastoth.co.uk
+ * email: atandrastoth@gmail.com
+ * Licensed under the MIT license
+ */
 var rightSide = document.querySelector('.right-side');
 var leftSide = document.querySelector('.left-side');
 rightSide.on('mouseenter, mouseleave', 'button, span, .img-div', function(e) {
@@ -43,7 +50,7 @@ centerHandler.on('click', 'button:nth-of-type(1)', function() {
 
 function leftOnOff() {
     if (leftSide.onFunctions.filter(function(f) {
-            return f.type == 'mouseleave' && f.selector == '.img-div' && f.active
+            return f.type == 'mouseleave' && f.selector == '.img-div'
         }).length) {
         leftSide.off('mouseleave', '.img-div');
     } else {
@@ -56,7 +63,7 @@ function leftOnOff() {
 
 function rightOnOff() {
     if (rightSide.onFunctions.filter(function(f) {
-            return f.type == 'mouseleave' && f.selector == '.img-div' && f.active
+            return f.type == 'mouseleave' && f.selector == '.img-div'
         }).length) {
         rightSide.off('mouseleave', '.img-div');
     } else {

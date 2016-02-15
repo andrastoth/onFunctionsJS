@@ -1,9 +1,18 @@
 /**
- * Create NodeList.prototype.on prototype
- * Add event, according to the parameters
- * @param  {string} types           [required]
- * @param  {string} css selectors   [optional]
- * @param  {function} func          [optional]
+ * onFunctions 1.0.0 javascript jQuery like on/of function
+ * Author: Tóth András
+ * Web: http://atandrastoth.co.uk
+ * email: atandrastoth@gmail.com
+ * Licensed under the MIT license
+ */
+/**
+ * Description: Attach an event handler function for one or more events to the selected elements.
+ * @param  {string} One or more comma separated event types                 [required]
+ * @param  {string} css selector string to filter the descendants 
+ *         of the selected elements that trigger the event. 
+ *         If the selector is null or omitted, the event is always 
+ *         triggered when it reaches the selected element.                  [optional]
+ * @param  {function} A function to execute when the event is triggered.    [required]
  */
 !NodeList.prototype.on ? NodeList.prototype.on = function(types, selectors, func) {
     (function(doc) {
@@ -21,8 +30,7 @@
         });
     }
 
-    function onFunction(sel, tp, fn, act) {
-        this.active = act;
+    function onFunction(sel, tp, fn) {
         this.selector = sel;
         this.type = tp;
         this.func = fn;
@@ -34,41 +42,39 @@
         };
     }
     [].forEach.call(this, function(root) {
-        root.DOMNodeChanged = function(e) {
-            var root = this;
-            [].forEach.call(root.onFunctions, function(func) {
-                if (matches.call(e.target, func.selector)) {
-                    if (e.type == 'DOMNodeInserted') {
-                        var onFunc = new onFunction(func.selector, func.type, func.func, true);
-                        onFunc.addEvent(e.target);
-                        root.onFunctions.push(onFunc);
-                    } else {
-                        func.active = false;
-                        func.removeEvent(e.target);
+        if (!root.onFunctions) {
+            root.onFunctions = [];
+            if (selectors.length) {
+                root.DOMNodeChanged = function(e) {
+                    if (this.onFunctions) {
+                        this.onFunctions.filter(function(func) {
+                            return matches.call(e.target, func.selector);
+                        }).forEach(function(func) {
+                            if (e.type == 'DOMNodeInserted') {
+                                func.addEvent(e.target);
+                            } else {
+                                func.removeEvent(e.target);
+                            }
+                        });
                     }
-                }
-            });
-        };
-        root.onFunctions = root.onFunctions ? root.onFunctions : [];
+                };
+            }
+            root.addEventListener('DOMNodeRemoved', root.DOMNodeChanged, false);
+            root.addEventListener('DOMNodeInserted', root.DOMNodeChanged, false);
+        }
         if (!selectors.length) {
             types.forEach(function(type) {
-                var onFunc = new onFunction(null, type, func, true);
+                var onFunc = new onFunction(null, type, func);
                 onFunc.addEvent(root);
                 root.onFunctions.push(onFunc);
             });
         } else {
-            root.addEventListener('DOMNodeRemoved', root.DOMNodeChanged, true);
-            root.addEventListener('DOMNodeInserted', root.DOMNodeChanged, true);
             types.forEach(function(type) {
                 selectors.forEach(function(selector) {
-                    var onFunc = new onFunction(selector, type, func, true);
+                    var onFunc = new onFunction(selector, type, func);
                     root.onFunctions.push(onFunc);
-                });
-            });
-            selectors.forEach(function(selector) {
-                [].forEach.call(root.querySelectorAll(selector), function(el) {
-                    root.onFunctions.forEach(function(func) {
-                        func.addEvent(el);
+                    [].forEach.call(root.querySelectorAll(selector), function(el) {
+                        onFunc.addEvent(el);
                     });
                 });
             });
@@ -76,80 +82,55 @@
     });
 } : console.error('NodeList.prototype.on already defined!');
 /**
- * NodeList.prototype.off prototype
- * Remove event, according to the parameters
- * @param  {string} types            [optional]
- * @param  {string} css selectors    [optional]
+ * Description: Remove an event handler.
+ * @param  {string} One or more comma separated event types                 [optional]
+ * @param  {string} A selector which should match the one originally 
+ *         passed to .on() when attaching event handlers.                   [optional]
  */
 !NodeList.prototype.off ? NodeList.prototype.off = function(types, selectors) {
     types = types ? types.split(',').map(function(s) {
         return s.trim()
     }) : [];
-    if (typeof selectors !== 'string') {
-        selectors = [];
-    } else {
-        selectors = selectors.split(',').map(function(s) {
-            return s.trim()
-        });
-    }
+    var destroy = types.length ? false : true;
+    selectors = selectors ? selectors.split(',').map(function(s) {
+        return s.trim()
+    }) : [];
     [].forEach.call(this, function(root) {
-        var deleteFunc = false,
-            destroy = false;
         if (root.onFunctions) {
-            if (!selectors.length) {
-                deleteFunc = true;
-                if (!types.length) {
-                    destroy = true;
-                    root.removeEventListener('DOMNodeRemoved', root.DOMNodeChanged, false);
-                    root.removeEventListener('DOMNodeInserted', root.DOMNodeChanged, false);
-                }
-                root.onFunctions.filter(function(func) {
-                    return func.selector === null && (types.indexOf(func.type) !== -1 || !types.length)
-                }).forEach(function(func) {
-                    func.removeEvent(root);
-                    root.onFunctions.splice(root.onFunctions.indexOf(func), 1);
-                    func = null;
-                });
-            }
-            if (!selectors.length) {
-                selectors = Array.from(new Set(root.onFunctions.map(function(func) {
-                    return func.selector;
-                })));
-            }
-            if (!types.length) {
-                types = Array.from(new Set(root.onFunctions.map(function(func) {
-                    return func.type;
-                })));
+            if (!selectors.length && !types.length) {
+                root.removeEventListener('DOMNodeRemoved', root.DOMNodeChanged);
+                root.removeEventListener('DOMNodeInserted', root.DOMNodeChanged);
             }
             root.onFunctions.filter(function(func) {
-                return types.indexOf(func.type) !== -1 && selectors.indexOf(func.selector) !== -1
+                return (types.indexOf(func.type) !== -1 || !types.length) && (selectors.indexOf(func.selector) !== -1 || !selectors.length)
             }).forEach(function(func) {
+                if (func.selector === null) {
+                    func.removeEvent(root);
+                }
                 [].forEach.call(root.querySelectorAll(func.selector), function(el) {
-                    func.active = false;
                     func.removeEvent(el);
-                    if (deleteFunc) {
-                        root.onFunctions.splice(root.onFunctions.indexOf(func), 1);
-                        func = null;
-                    }
                 });
+                root.onFunctions.splice(root.onFunctions.indexOf(func), 1);
+                func = null;
+                delete func;
             });
             if (destroy) {
                 root.onFunctions = null;
                 delete root.onFunctions;
-                if(root.DOMContentChanged){
-                    root.DOMContentChanged = null;
-                    delete root.DOMContentChanged;
-                }
+                root.DOMContentChanged = null;
+                delete root.DOMContentChanged;
             }
         };
     });
 } : console.error('NodeList.prototype.off already defined!');
 /**
- * Create HTMLElement.prototype.on prototype
- * Add event, according to the parameters
- * @param  {string} types           [required]
- * @param  {string} css selectors   [optional]
- * @param  {function} func          [optional]
+ * Description: Attach an event handler function for one or more events to the selected elements.
+ * @param  {string} One or more comma separated event types                 [required]
+ * @param  {string} css selector string to filter the descendants 
+ *         of the selected elements that trigger the event. 
+ *         If the selector is null or omitted, the event is always 
+ *         triggered when it reaches the selected element.                  [optional]
+ * @param  {function} A function to execute when the event is triggered.    [required]
  */
 !HTMLElement.prototype.on ? HTMLElement.prototype.on = function(types, selectors, func) {
     var id = 'data-wrapp-'.concat(Math.random().toString(16).substring(2));
@@ -159,10 +140,10 @@
     this.removeAttribute(id);
 } : console.error('HTMLElement.prototype.on already defined!');
 /**
- * HTMLElement.prototype.off prototype
- * Remove event, according to the parameters
- * @param  {string} types            [optional]
- * @param  {string} css selectors    [optional]
+ * Description: Remove an event handler.
+ * @param  {string} One or more comma separated event types                 [optional]
+ * @param  {string} A selector which should match the one originally 
+ *         passed to .on() when attaching event handlers.                   [optional]
  */
 !HTMLElement.prototype.off ? HTMLElement.prototype.off = function(types, selectors) {
     var id = 'data-'.concat(Math.random().toString(16).substring(2));
