@@ -1,6 +1,6 @@
 /**
  * onFunctions 1.0.0 javascript jQuery like on/of function
- * Author: TÛth Andr·s
+ * Author: T√≥th Andr√°s
  * Web: http://atandrastoth.co.uk
  * email: atandrastoth@gmail.com
  * Licensed under the MIT license
@@ -133,11 +133,7 @@
  * @param  {function} A function to execute when the event is triggered.    [required]
  */
 !HTMLElement.prototype.on ? HTMLElement.prototype.on = function(types, selectors, func) {
-    var id = 'data-wrapp-'.concat(Math.random().toString(16).substring(2));
-    this.setAttribute(id, true);
-    var wrapped = document.querySelectorAll('[' + id + ']');
-    wrapped.on(types, selectors, func);
-    this.removeAttribute(id);
+    NodeList.prototype.on.call([this], types, selectors, func);
 } : console.error('HTMLElement.prototype.on already defined!');
 /**
  * Description: Remove an event handler.
@@ -146,9 +142,5 @@
  *         passed to .on() when attaching event handlers.                   [optional]
  */
 !HTMLElement.prototype.off ? HTMLElement.prototype.off = function(types, selectors) {
-    var id = 'data-'.concat(Math.random().toString(16).substring(2));
-    this.setAttribute(id, true);
-    var wrapped = document.querySelectorAll('[' + id + ']');
-    wrapped.off(types, selectors);
-    this.removeAttribute(id);
+    NodeList.prototype.off.call([this], types, selectors);
 } : console.error('HTMLElement.prototype.off already defined!');
