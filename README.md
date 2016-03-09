@@ -12,6 +12,13 @@ Javascript jQuery like (NodeList and HTMLElement) on/off function
 Version
 ----
 
+1.0.6
+
+    - Some minor bug fixed
+
+Version
+----
+
 1.0.0
 
 Required HTML & Javascript example

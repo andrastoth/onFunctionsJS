@@ -1,5 +1,5 @@
 /**
- * onFunctions 1.0.5 javascript jQuery like on/of function
+ * onFunctions 1.0.6 javascript jQuery like on/of function
  * Author: Tóth András
  * Web: http://atandrastoth.co.uk
  * email: atandrastoth@gmail.com
@@ -46,22 +46,20 @@
             root.onFunctions = [];
             if (selectors.length) {
                 root.DOMNodeChanged = function(e) {
-                    if (e.relatedNode.onFunctions) {
-                        try {
-                            var array = [].slice.call(e.target.querySelectorAll('*'));
-                            array.push(e.target);
-                            array.forEach(function(node) {
-                                e.relatedNode.onFunctions.filter(function(func) {
-                                    return matches.call(node, func.selector);
-                                }).forEach(function(func) {
-                                    if (e.type == 'DOMNodeInserted') {
-                                        func.addEvent(node);
-                                    } else {
-                                        func.removeEvent(node);
-                                    }
-                                });
+                    if (e.relatedNode.onFunctions && e.target.querySelectorAll) {
+                        var nodes = [].slice.call(e.target.querySelectorAll('*'));
+                        nodes.push(e.target);
+                        nodes.forEach(function(node) {
+                            e.relatedNode.onFunctions.filter(function(func) {
+                                return matches.call(node, func.selector);
+                            }).forEach(function(func) {
+                                if (e.type == 'DOMNodeInserted') {
+                                    func.addEvent(node);
+                                } else {
+                                    func.removeEvent(node);
+                                }
                             });
-                        } catch (err) {}
+                        });
                     }
                 };
             }
