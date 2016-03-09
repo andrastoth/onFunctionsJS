@@ -1,5 +1,5 @@
 /**
- * onFunctions 1.0.0 javascript jQuery like on/of function
+ * onFunctions 1.0.5 javascript jQuery like on/of function
  * Author: Tóth András
  * Web: http://atandrastoth.co.uk
  * email: atandrastoth@gmail.com
@@ -19,14 +19,14 @@
         matches = doc.matchesSelector || doc.webkitMatchesSelector || doc.mozMatchesSelector || doc.oMatchesSelector || doc.msMatchesSelector;
     })(document.documentElement);
     types = types ? types.split(',').map(function(s) {
-        return s.trim()
+        return s.trim();
     }) : [];
     if (typeof selectors !== 'string') {
         func = selectors;
         selectors = [];
     } else {
         selectors = selectors.split(',').map(function(s) {
-            return s.trim()
+            return s.trim();
         });
     }
 
@@ -46,16 +46,22 @@
             root.onFunctions = [];
             if (selectors.length) {
                 root.DOMNodeChanged = function(e) {
-                    if (this.onFunctions) {
-                        this.onFunctions.filter(function(func) {
-                            return matches.call(e.target, func.selector);
-                        }).forEach(function(func) {
-                            if (e.type == 'DOMNodeInserted') {
-                                func.addEvent(e.target);
-                            } else {
-                                func.removeEvent(e.target);
-                            }
-                        });
+                    if (e.relatedNode.onFunctions) {
+                        try {
+                            var array = [].slice.call(e.target.querySelectorAll('*'));
+                            array.push(e.target);
+                            array.forEach(function(node) {
+                                e.relatedNode.onFunctions.filter(function(func) {
+                                    return matches.call(node, func.selector);
+                                }).forEach(function(func) {
+                                    if (e.type == 'DOMNodeInserted') {
+                                        func.addEvent(node);
+                                    } else {
+                                        func.removeEvent(node);
+                                    }
+                                });
+                            });
+                        } catch (err) {}
                     }
                 };
             }
@@ -89,11 +95,11 @@
  */
 !NodeList.prototype.off ? NodeList.prototype.off = function(types, selectors) {
     types = types ? types.split(',').map(function(s) {
-        return s.trim()
+        return s.trim();
     }) : [];
     var destroy = types.length ? false : true;
     selectors = selectors ? selectors.split(',').map(function(s) {
-        return s.trim()
+        return s.trim();
     }) : [];
     [].forEach.call(this, function(root) {
         if (root.onFunctions) {
@@ -102,7 +108,7 @@
                 root.removeEventListener('DOMNodeInserted', root.DOMNodeChanged);
             }
             root.onFunctions.filter(function(func) {
-                return (types.indexOf(func.type) !== -1 || !types.length) && (selectors.indexOf(func.selector) !== -1 || !selectors.length)
+                return (types.indexOf(func.type) !== -1 || !types.length) && (selectors.indexOf(func.selector) !== -1 || !selectors.length);
             }).forEach(function(func) {
                 if (func.selector === null) {
                     func.removeEvent(root);
@@ -112,7 +118,6 @@
                 });
                 root.onFunctions.splice(root.onFunctions.indexOf(func), 1);
                 func = null;
-                delete func;
             });
             if (destroy) {
                 root.onFunctions = null;
@@ -120,7 +125,7 @@
                 root.DOMContentChanged = null;
                 delete root.DOMContentChanged;
             }
-        };
+        }
     });
 } : console.error('NodeList.prototype.off already defined!');
 /**
